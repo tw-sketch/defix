@@ -3,7 +3,6 @@ import subprocess
 def reslight():
     subprocess.run(["sudo", "systemctl", "restart", "lightdm"])
     print("LightDM restarted")
-    command()
 
 def startlight():
     subprocess.run(["sudo", "systemctl", "start", "lightdm"])
@@ -11,17 +10,19 @@ def startlight():
 def dislight():
     subprocess.run(["sudo", "systemctl", "disable", "lightdm"])
     print("LightDM disabled")
-    command()
 
 def enlight():
     subprocess.run(["sudo", "systemctl", "enable", "lightdm"])
     print("LightDM enabled")
-    command()
 
-def command():
+print("Linux desktop debugger v--0.2")
+print("Use 'help' to see the list of command lines")
+while True:
+    
     get = input("fixlight:")
     if get == "reslight":
         reslight()
+        break
     elif get == "startlight":
         startlight()
     elif get == "dislight":
@@ -29,16 +30,13 @@ def command():
     elif get == "enlight":
         enlight()
         startlight()
-    elif get == "fix":
-        dislight()
-        enlight()
     elif get == "help":
-        print("""reslight(restarts LightDM) startlight(starts LightDM) dislight(disables LightDM) enlight(enables LightDM)""")
-        command()
+        list = ["reslight (restarts lightdm)", "dislight (disables lightdm)", "startlight (starts lightdm)",
+                "enlight (enables lightdm)", "stop (closes the program)"]
+        for item in list:
+            print(item)
+    elif get == "stop":
+        break
     else:
         print("Invalid input")
-        command()
 
-print("Linux desktop rebooter v--0.1")
-print("Use 'help' to see the list of command lines")
-command()
