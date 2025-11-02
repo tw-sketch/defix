@@ -1,24 +1,29 @@
 #!/usr/bin/env python3
 import subprocess
+
+def control_lightdm(action):
+    try:
+        subprocess.run(["sudo", "systemctl", action, "lightdm"])
+        print(f"LightDM {action}")
+    except subproccess.CalledProccessError:
+        print(f"Error: Falled to {action} LightDM. Check your permisions or system status.")
+
 def reslight():
-    subprocess.run(["sudo", "systemctl", "restart", "lightdm"])
-    print("LightDM restarted")
+    control_lightdm("restart")
 
 def startlight():
-    subprocess.run(["sudo", "systemctl", "start", "lightdm"])
+    control_lightdm("start")
 
 def dislight():
-    subprocess.run(["sudo", "systemctl", "disable", "lightdm"])
-    print("LightDM disabled")
+    control_lightdm("disable")
 
 def enlight():
-    subprocess.run(["sudo", "systemctl", "enable", "lightdm"])
-    print("LightDM enabled")
+    control_lightdm("enable")
 
-print("Linux desktop debugger v--0.2")
+print("Linux desktop debugger v--0.3")
 print("Use 'help' to see the list of command lines")
-while True:
-    
+
+while True: 
     get = input("fixlight:")
     if get == "reslight":
         reslight()
