@@ -5,7 +5,7 @@ def control_lightdm(action):
     try:
         subprocess.run(["sudo", "systemctl", action, "lightdm"])
         print(f"LightDM {action}")
-    except subproccess.CalledProccessError:
+    except subprocess.CalledProccessError:
         print(f"Error: Falled to {action} LightDM. Check your permisions or system status.")
 
 def reslight():
