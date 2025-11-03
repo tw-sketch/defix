@@ -8,6 +8,12 @@ def control_lightdm(action):
     except subprocess.CalledProcessError:
         print(f"Error: Failed to {action} LightDM. Check your permisions or system status.")
 
+def control_gdm(string):
+    try:
+        subprocess.run(["sudo", "systemctl", string, "gdm"])
+    except subprocess.CalledProcessError:
+        print(f"Error: Failed to {string} GDM. Check your permisions or system status.")
+
 def reslight():
     control_lightdm("restart")
 
@@ -20,7 +26,19 @@ def dislight():
 def enlight():
     control_lightdm("enable")
 
-print("Linux desktop debugger v--0.3")
+def resgdm():
+    control_gdm("restart")
+
+def startgdm():
+    control_gdm("start")
+
+def disgdm():
+    control_gdm("disable")
+
+def engdm():
+    control_gdm("enable")
+
+print("Linux desktop debugger v--0.4")
 print("Use 'help' to see the list of command lines")
 
 while True: 
@@ -37,7 +55,9 @@ while True:
         startlight()
     elif get == "help":
         list = ["reslight (restarts lightdm)", "dislight (disables lightdm)", "startlight (starts lightdm)",
-                "enlight (enables lightdm)", "stop (closes the program)"]
+                "enlight (enables lightdm)", "resgdm (restarts gdm)", "startgdm (starts gdm)", "disgdm (disables gdm)",
+                 "engdm (enables gdm)" "stop (closes the program)" 
+        ]
         for item in list:
             print(item)
     elif get == "stop":
